@@ -1,0 +1,14 @@
+#pragma once
+
+#include "EZ-Template/api.hpp"
+#include "api.h"
+
+extern ez::Drive chassis;
+
+// Top ten pistons
+inline ez::Piston scraper('A');
+inline ez::Piston descore('H');
+inline ez::Piston switcher('C');
+
+// elite motors
+inline pros::MotorGroup intake({9, -10});
