@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "0.0.61 PLS WORK",
+    "project_name": "0.1.39 PLS WORK",
     "target": "v5",
     "templates": {
       "EZ-Template": {

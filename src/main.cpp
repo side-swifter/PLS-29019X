@@ -33,7 +33,6 @@ void initialize() {
 
   chassis.odom_tracker_back_set(&horiz_tracker);
   chassis.odom_tracker_left_set(&vert_tracker);
-  chassis.odom_theta_flip();
 
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true);   // Enables modifying the controller curve with buttons on the joysticks
@@ -49,8 +48,9 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-    {"left auto", L},
-    {"7 block auto left", L7}
+    {"left auto (7 blocks long goal)", LA7},
+    {"right auto (7 blocks long goal)", RA7},
+    {"left auto (3 blocks mid goal 4 in long goal)", LA34}
 
 
   });
@@ -249,12 +249,12 @@ void opcontrol() {
 
     // descore
 
-    descore.button_toggle(master.get_digital(DIGITAL_DOWN));
+    descore.button_toggle(master.get_digital(DIGITAL_UP));
     
 
     // quick run my auto
     if(master.get_digital_new_press(DIGITAL_Y)){
-      RA();
+      LA34();
     }
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
