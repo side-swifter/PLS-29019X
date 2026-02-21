@@ -17,7 +17,7 @@ const int SWING_SPEED = 110;
 void default_constants() {
   // P, I, D
   chassis.pid_drive_constants_set(8.4, 0.0, 46.5);
-  chassis.pid_heading_constants_set(9.9, 0.0, 22.75);
+  chassis.pid_heading_constants_set(10, 0.0, 22.75);
   chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);
 
@@ -41,10 +41,10 @@ void default_constants() {
   chassis.slew_drive_constants_set(3_in, 70);
   chassis.slew_swing_constants_set(3_in, 80);
 
-  // Bias (balanced)
-  chassis.odom_turn_bias_set(0.6);
+  // Bias
+  chassis.odom_turn_bias_set(0.7);
 
-  chassis.odom_look_ahead_set(7_in);
+  chassis.odom_look_ahead_set(9.5_in);
   chassis.odom_boomerang_distance_set(16_in);
   chassis.odom_boomerang_dlead_set(0.625);
 
@@ -550,14 +550,31 @@ void drive(){
 }
 
 
-
 void RA() {
-  chassis.drive_imu_reset();
-  pros::delay(200);
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);
 
+  intake.move(127);
 
-  chassis.pid_odom_set({{0_in, 25_in}, fwd, 110});
+  chassis.odom_look_ahead_set(10_in);
+  // optional, but usually helps keep it driving forward hard
+  chassis.odom_turn_bias_set(0.55);
+
+  chassis.pid_odom_set(
+    {
+      {{5_in,    24_in,  -15_deg}, fwd, 70},
+      {{12_in, 32_in,  -58_deg}, fwd, 70},
+      {{19_in,   36_in,  -67_deg}, fwd, 70}
+    },
+    true  // ✅ follow as ONE continuous path (pure pursuit-like)
+  );
+
+  // do your mechanism timing during the path
+  chassis.pid_wait_until(5_in);
+  scraper.set(true);
+  chassis.pid_wait_until(6.1_in);
+  scraper.set(false);
 
   chassis.pid_wait();
+  scraper.set(true);
 }
+

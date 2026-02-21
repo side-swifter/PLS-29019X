@@ -33,6 +33,7 @@ void initialize() {
 
   chassis.odom_tracker_back_set(&horiz_tracker);
   chassis.odom_tracker_left_set(&vert_tracker);
+  chassis.odom_theta_flip();
 
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true);   // Enables modifying the controller curve with buttons on the joysticks
@@ -56,6 +57,7 @@ void initialize() {
 
   // Initialize chassis and auton selector
   chassis.initialize();
+  
   ez::as::initialize();
   master.rumble(chassis.drive_imu_calibrated() ? "." : "---");
 }
