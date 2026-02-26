@@ -16,7 +16,7 @@ ez::Drive chassis(
 
 // Tracking wheels (positive going FORWARD and RIGHT)
 ez::tracking_wheel horiz_tracker(-19, 2.0, 2.25);
-ez::tracking_wheel vert_tracker(-20, 2.0, 4.5);
+ez::tracking_wheel vert_tracker(-20, 2.0, 3.75);
 
 
 /**
@@ -51,7 +51,8 @@ void initialize() {
     {"left auto (7 blocks long goal)", LA7},
     {"right auto (7 blocks long goal)", RA7},
     {"left auto (3 blocks mid goal 4 in long goal)", LA34},
-    {"skills", skills}
+    {"skills", skills},
+    {"win for point", WinForPoint}
 
 
   });
@@ -255,7 +256,7 @@ void opcontrol() {
 
     // quick run my auto
     if(master.get_digital_new_press(DIGITAL_Y)){
-      skills();
+      WinForPoint();
     }
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME

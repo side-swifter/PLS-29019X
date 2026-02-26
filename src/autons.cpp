@@ -11,6 +11,9 @@ const int TURN_SPEED  = 90;
 const int SWING_SPEED = 110;
 
 
+okapi::QLength backDis = -12.85_in;
+
+
 ///
 // Constants
 ///
@@ -598,7 +601,7 @@ void RA7() {
   // optional, but usually helps keep it driving forward hard
   chassis.odom_turn_bias_set(0.4);
 
-  chassis.pid_odom_set({{5_in, 25_in, 15_deg}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{4_in, 25_in, 15_deg}, fwd, DRIVE_SPEED});
   pros::delay(560);
   scraper.set(true);
   chassis.pid_wait();
@@ -606,7 +609,7 @@ void RA7() {
   chassis.pid_turn_set(135_deg, 85);
   chassis.pid_wait();
 
-  chassis.pid_odom_set({{22.43_in, 2_in,}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{24_in, 2_in,}, fwd, DRIVE_SPEED});
   chassis.pid_wait();
 
   chassis.pid_turn_set(180_deg, 85);
@@ -620,8 +623,11 @@ void RA7() {
   chassis.pid_wait();
 
 
-  chassis.pid_drive_set(-29_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-32_in, DRIVE_SPEED);
   chassis.pid_wait();
+
+
+  // descore
 
   descore.set(false);
 
@@ -636,7 +642,7 @@ void RA7() {
   chassis.pid_turn_set(225_deg, TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-11.8_in, DRIVE_SPEED);
+  chassis.pid_drive_set(backDis, DRIVE_SPEED);
   chassis.pid_wait();
 
   chassis.pid_turn_set(180_deg, TURN_SPEED);
@@ -684,27 +690,35 @@ void LA7() {
   chassis.pid_turn_set(-135_deg, 85);
   chassis.pid_wait();
 
-  chassis.pid_odom_set({{-35.2_in, 6_in,}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{-34.5_in, 6_in,}, fwd, DRIVE_SPEED});
   chassis.pid_wait();
 
   chassis.pid_turn_set(180_deg, 85);
   chassis.pid_wait();
 
 
-    chassis.pid_drive_set(10_in, 127);
+  chassis.pid_drive_set(10_in, 127);
   chassis.pid_wait();
-  pros::delay(120);
+  // scraper time
+  pros::delay(90);
 
   chassis.pid_turn_set(180_deg, 85);
   chassis.pid_wait();
 
 
-  chassis.pid_drive_set(-29_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-31.5_in, DRIVE_SPEED);
   chassis.pid_wait();
 
   descore.set(false);
 
+
+  intake.move(-100);
+  pros::delay(100);
+  intake.move(127);
+
   pros::delay(2500);
+
+  //decore
 
   chassis.pid_drive_set(11_in, DRIVE_SPEED);
   chassis.pid_wait();
@@ -715,7 +729,7 @@ void LA7() {
   chassis.pid_turn_set(225_deg, TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-12.15_in, DRIVE_SPEED);
+  chassis.pid_drive_set(backDis, DRIVE_SPEED);
   chassis.pid_wait();
 
   chassis.pid_turn_set(180_deg, TURN_SPEED);
@@ -735,57 +749,62 @@ void LA7() {
 
 
 void LA34() {
-  chassis.odom_xyt_set(0_in, 0_in, 0_deg);
+  chassis.odom_xyt_set(0.2_in, 1_in, 0_deg);
 
   
   intake.move(127);
   descore.set(true);
 
   chassis.odom_look_ahead_set(11_in);
-  // optional, but usually helps keep it driving forward hard
   chassis.odom_turn_bias_set(0.4);
 
-  chassis.pid_odom_set({{-5_in, 25_in, -17_deg}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{-5_in, 25_in, -17_deg}, fwd, 127});
   pros::delay(560);
   scraper.set(true);
   chassis.pid_wait();
 
 
 
-  chassis.pid_odom_set({{1.1_in, 41.6_in, -135_deg}, rev, DRIVE_SPEED});
+  chassis.pid_odom_set({{4.5_in, 41.9_in, -135_deg}, rev, DRIVE_SPEED});
   chassis.pid_wait();
 
 
   intake.move(85);
   switcher.set(true);
-  pros::delay(725);
+  pros::delay(600);
   switcher.set(false);
   intake.move(127);
 
 
-  chassis.pid_odom_set({{-34.45_in, 6_in}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{-31.4_in, 6_in}, fwd, DRIVE_SPEED});
   chassis.pid_wait();
 
   chassis.pid_turn_set(-180_deg, 85);
   chassis.pid_wait();
 
 
-  chassis.pid_drive_set(10_in, 127);
+  chassis.pid_drive_set(12.5_in, 127);
   chassis.pid_wait();
-  pros::delay(120);
-
+  pros::delay(130);
   chassis.pid_turn_set(180_deg, 85);
   chassis.pid_wait();
 
 
-  chassis.pid_drive_set(-29_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-33_in, 127);
   chassis.pid_wait();
 
   descore.set(false);
 
-  pros::delay(2350);
+  intake.move(-100);
+  pros::delay(60);
+  intake.move(127);
 
-  chassis.pid_drive_set(11_in, DRIVE_SPEED);
+  pros::delay(2250);
+
+
+   // descore
+
+  chassis.pid_drive_set(11_in, 120);
   chassis.pid_wait();
 
   descore.set(true);
@@ -794,7 +813,7 @@ void LA34() {
   chassis.pid_turn_set(225_deg, TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-12.15_in, DRIVE_SPEED);
+  chassis.pid_drive_set(backDis, DRIVE_SPEED);
   chassis.pid_wait();
 
   chassis.pid_turn_set(180_deg, TURN_SPEED);
@@ -802,7 +821,7 @@ void LA34() {
 
   descore.set(false);
 
-  chassis.pid_drive_set(-19.5_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-19.5_in, 120);
   chassis.pid_wait();
 
 }
@@ -824,7 +843,7 @@ void skills() {
   // optional, but usually helps keep it driving forward hard
   chassis.odom_turn_bias_set(0.4);
 
-  chassis.pid_drive_set(33_in, DRIVE_SPEED);
+  chassis.pid_drive_set(32.7_in, DRIVE_SPEED);
   chassis.pid_wait();
 
 
@@ -832,10 +851,13 @@ void skills() {
   chassis.pid_wait();
 
 
-  chassis.pid_drive_set(17_in, 100);
+  chassis.pid_drive_set(19.5_in, 80);
   chassis.pid_wait();
 
-  pros::delay(550);
+
+  // scraper time
+
+  pros::delay(665);
 
   chassis.pid_drive_set(-8_in, DRIVE_SPEED);
   chassis.pid_wait();
@@ -850,12 +872,146 @@ void skills() {
   chassis.pid_wait();
 
 
+  scraper.set(false);
 
   chassis.pid_drive_set(-75_in, DRIVE_SPEED);
+
+  chassis.pid_wait_until(-18_in);
+  intake.move(0);
+  chassis.pid_wait_quick();
+
+
+
+
+
+  // line up again
+  chassis.pid_turn_set(-135_deg, 85);
+  chassis.pid_wait();
+
+  scraper.set(true);
+
+  chassis.pid_drive_set(-16.5_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(0_deg, 85);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-29_in, DRIVE_SPEED);
   chassis.pid_wait();
 
 
-  chassis.pid_swing_set(ez::LEFT_SWING, 0_deg, SWING_SPEED, 50);
+  // unload first
+
+
+  intake.move(-50);
+  pros::delay(100);
+  intake.move(127);
+  descore.set(false);
+  pros::delay(2500);
+
+  
+  descore.set(true);
+
+  // grab matchload
+
+
+
+  chassis.pid_turn_set(-1_deg, 85);
   chassis.pid_wait();
+  chassis.pid_drive_set(31_in, 60, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(0_deg, 85);
+  chassis.pid_wait();
+
+  pros::delay(570);
+
+  chassis.pid_drive_set(-31_in, 120);
+  chassis.pid_wait();
+  descore.set(false);
+
+  intake.move(-50);
+  pros::delay(100);
+  intake.move(127);
+  descore.set(false);
+  pros::delay(2500);
+
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  
+  chassis.pid_swing_set(ez::RIGHT_SWING, 110_deg, 90);
+  chassis.pid_wait();
+
+}
+
+
+
+
+void WinForPoint(){
+  chassis.odom_xyt_set(0_in, 0_in, 90_deg);
+
+  
+  intake.move(127);
+  descore.set(true);
+  scraper.set(true);
+
+  chassis.odom_look_ahead_set(11_in);
+  // optional, but usually helps keep it driving forward hard
+  chassis.odom_turn_bias_set(0.4);
+
+  chassis.pid_drive_set(32.7_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+
+  chassis.pid_turn_set(180_deg, 85);
+  chassis.pid_wait();
+
+
+  chassis.pid_drive_set(19.5_in, 80);
+  chassis.pid_wait();
+
+
+
+  // scraper time
+
+  pros::delay(24);
+  scraper.set(false);
+
+  chassis.pid_drive_set(-28.6_in, 127);
+  chassis.pid_wait();
+
+  descore.set(false);
+  pros::delay(900);
+  descore.set(true);
+
+  chassis.pid_swing_set(ez::LEFT_SWING, 332_deg, 94);
+  chassis.pid_wait();
+
+
+  chassis.pid_drive_set(16_in, DRIVE_SPEED);
+  chassis.pid_wait_until(9_in);
+  scraper.set(true);
+  chassis.pid_wait();
+
+  
+  chassis.pid_turn_set(-90_deg, 85);
+  chassis.pid_wait();
+
+  scraper.set(false);
+
+  chassis.pid_drive_set(43_in, DRIVE_SPEED);
+  chassis.pid_wait_until(35.8_in);
+  scraper.set(true);
+  chassis.pid_wait();
+
+
+  chassis.pid_turn_set(-135_deg, 85);
+  chassis.pid_wait();
+
+
+
+
+
+
 
 }
