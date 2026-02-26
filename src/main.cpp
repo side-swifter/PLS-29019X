@@ -51,6 +51,7 @@ void initialize() {
     {"left auto (7 blocks long goal)", LA7},
     {"right auto (7 blocks long goal)", RA7},
     {"left auto (3 blocks mid goal 4 in long goal)", LA34},
+    {"right auto (3 blocks mid goal 4 in long goal)", RA34},
     {"skills", skills},
     {"win for point", WinForPoint}
 
