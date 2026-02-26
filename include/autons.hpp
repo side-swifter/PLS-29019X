@@ -8,3 +8,4 @@ void default_constants();
 void RA7();
 void LA7();
 void LA34();
+void skills();

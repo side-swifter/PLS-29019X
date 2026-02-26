@@ -50,7 +50,8 @@ void initialize() {
   ez::as::auton_selector.autons_add({
     {"left auto (7 blocks long goal)", LA7},
     {"right auto (7 blocks long goal)", RA7},
-    {"left auto (3 blocks mid goal 4 in long goal)", LA34}
+    {"left auto (3 blocks mid goal 4 in long goal)", LA34},
+    {"skills", skills}
 
 
   });
@@ -254,7 +255,7 @@ void opcontrol() {
 
     // quick run my auto
     if(master.get_digital_new_press(DIGITAL_Y)){
-      LA34();
+      skills();
     }
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
