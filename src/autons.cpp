@@ -600,7 +600,7 @@ void RA7() {
   chassis.odom_look_ahead_set(11_in);
   // optional, but usually helps keep it driving forward hard
   chassis.odom_turn_bias_set(0.4);
-
+                        //4 in right, 25 in forward, 15 deg right
   chassis.pid_odom_set({{4_in, 25_in, 15_deg}, fwd, DRIVE_SPEED});
   pros::delay(560);
   scraper.set(true);
@@ -902,6 +902,8 @@ void LA34() {
   chassis.pid_wait();
 
 }
+
+
 
 
 

@@ -257,7 +257,7 @@ void opcontrol() {
 
     // quick run my auto
     if(master.get_digital_new_press(DIGITAL_Y)){
-      WinForPoint();
+      RA34();
     }
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME

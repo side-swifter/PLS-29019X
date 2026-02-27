@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "0.2.61 PLS WORK",
+    "project_name": "0.2.61 PLS WOR",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -425,7 +425,9 @@
     },
     "upload_options": {
       "description": "gridwalkers.net",
-      "icon": "pizza"
+      "icon": "pizza",
+      "after": "screen",
+      "slot": 1
     },
     "use_early_access": false
   }
